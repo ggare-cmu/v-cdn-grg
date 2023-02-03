@@ -12,3 +12,7 @@ dump_*/
 
 .ipynb_checkpoints/
 demo_video/data/
+
+data/*
+demo_video/*ball*
+demo_video/*cloth*

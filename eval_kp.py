@@ -88,6 +88,8 @@ def evaluate(roll_idx, video=True, image=True):
     if video:
         video_path = eval_path + '.avi'
         fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
+        # video_path = eval_path + '.mp4'
+        # fourcc = cv2.VideoWriter_fourcc(*'H264')
         print('Save video as %s' % video_path)
         frame_rate = 25 if args.env in ['Ball'] else 60
         out = cv2.VideoWriter(video_path, fourcc, frame_rate, (
@@ -148,7 +150,7 @@ def evaluate(roll_idx, video=True, image=True):
             lim = args.lim
             keypoint = to_np(keypoint)[0] - [lim[0], lim[2]]
             keypoint *= 400 / 2.
-            keypoint = np.round(keypoint).astype(np.int)
+            keypoint = np.round(keypoint).astype(int)
 
             heatmap = to_np(heatmap)[0].transpose((1, 2, 0))
             heatmap = np.sum(heatmap, 2)
@@ -163,7 +165,7 @@ def evaluate(roll_idx, video=True, image=True):
             # generate the visualization
             img_path = os.path.join(data_dir, str(roll_idx), 'fig_%d%s' % (i + args.eval_st_idx, suffix))
             img = cv2.imread(img_path)
-            img = cv2.resize(img, (400, 400)).astype(np.float)
+            img = cv2.resize(img, (400, 400)).astype(float)
             img_overlay = img.copy()
             kp_map = np.zeros((img.shape[0], img.shape[1], 3))
 

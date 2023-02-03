@@ -109,7 +109,8 @@ class BallEngine(Engine):
                 if flag:
                     break
             body = pymunk.Body(self.mass, inertia)
-            body.position = Vec2d((x, y))
+            # body.position = Vec2d((x, y))
+            body.position = Vec2d(x, y)
             shape = pymunk.Circle(body, 0., (0, 0))
             shape.elasticity = 1
             self.space.add(body, shape)
@@ -188,7 +189,8 @@ class BallEngine(Engine):
             d = max(-20, min(-eps, p[1] - p_range[3]))
             impulse[1] += f_scale / d
 
-            self.balls[i].apply_impulse_at_local_point(impulse=impulse, point=(0, 0))
+            # self.balls[i].apply_impulse_at_local_point(impulse=impulse, point=(0, 0))
+            self.balls[i].apply_impulse_at_local_point(impulse=impulse.tolist(), point=(0, 0))
 
     def init(self, n_ball=5, init_impulse=True, param_load=None):
         self.space = pymunk.Space()
@@ -230,7 +232,8 @@ class BallEngine(Engine):
         if action is None:
             return
         for i in range(self.n_ball):
-            self.balls[i].apply_force_at_local_point(force=action[i], point=(0, 0))
+            # self.balls[i].apply_force_at_local_point(force=action[i], point=(0, 0))
+            self.balls[i].apply_force_at_local_point(force=action[i].tolist(), point=(0, 0))
 
     def step(self, action=None):
         self.state_prv = self.get_state()

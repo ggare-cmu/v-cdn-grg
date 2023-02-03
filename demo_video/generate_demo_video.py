@@ -13,6 +13,9 @@ from progressbar import ProgressBar
 from torch.autograd import Variable
 from torch.utils.data import Dataset
 
+import sys
+sys.path.append('./')
+
 from physics_engine import BallEngine, ClothEngine
 
 from utils import rand_float, rand_int
